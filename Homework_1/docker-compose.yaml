@@ -1,0 +1,42 @@
+version: '3.1'
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - ./client:/app
+    networks:
+      - pcb_network
+    environment:
+      - SERVER_PORT=8989
+      - CLIENT_PORT=8988
+    env_file:
+      - .env
+    depends_on:
+      - server
+      
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - ./server:/app
+    networks:
+      - pcb_network
+    environment:
+      - SERVER_PORT=8989
+      - CLIENT_PORT=8988
+    env_file:
+      - .env      
+
+networks:
+  pcb_network:
+    driver: bridge
+
+
+   
+
+
+
