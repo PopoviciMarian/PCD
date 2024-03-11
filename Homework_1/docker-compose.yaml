@@ -16,7 +16,17 @@ services:
       - .env
     depends_on:
       - server
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+    develop:
+      sysctls:
+        - net.core.rmem_max=26214400 # 25MB
+        - net.core.wmem_max=26214400 # 25MB
       
+
   server:
     build:
       context: ./server
@@ -29,7 +39,17 @@ services:
       - SERVER_PORT=8989
       - CLIENT_PORT=8988
     env_file:
-      - .env      
+      - .env    
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G  
+    develop:
+      sysctls:
+        - net.core.rmem_max=26214400 # 25MB
+        - net.core.wmem_max=26214400 # 25MB
+
 
 networks:
   pcb_network:
