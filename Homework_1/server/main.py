@@ -92,10 +92,10 @@ class Server:
         finally:
             file_handler.close() 
             # append map_time_chunk to file (statistics.txt)
-            with open('statistics.txt', 'a') as file:
-                file.write(f'PROTOCOL: {self.protocol} - MECHANISM: {self.mechanism} - CHUNK_SIZE: {self.chunk_size}\n')
-                for key, value in map_time_chunk.items():
-                    file.write(f'{key} - {value}\n')
+            # with open('statistics.txt', 'a') as file:
+            #     file.write(f'PROTOCOL: {self.protocol} - MECHANISM: {self.mechanism} - CHUNK_SIZE: {self.chunk_size}\n')
+            #     for key, value in map_time_chunk.items():
+            #         file.write(f'{key} - {value}\n')
 
 
 if __name__ == '__main__':

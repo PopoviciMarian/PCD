@@ -31,8 +31,8 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    volumes:
-      - ./server:/app
+    # volumes:
+    #   - ./server:/app
     networks:
       - pcb_network
     environment:

@@ -19,17 +19,8 @@ FILE_NAME=sample.txt
 ```
 
 
-## Results without saving the file
+## Results without saving
 
-<!-- 
-TCP - STREAMING - 0.099s - Chunks sent: 12800  -  Chunks received: 22004 -209715200 bytes
-TCP - STOP_AND_WAIT -0.60s - Chunks sent: 12800  -  Chunks received: 12800 -209715200 bytes
-
-UDP - STREAMING - 1.930s - Chunks sent: 12800  -  Chunks received: 12798 -209715200 bytes - received: 209682432 bytes
-UDP - STOP_AND_WAIT - 3.479s - Chunks sent: 12800  -  Chunks received: 12800 -209715200 bytes
-
-Create a table with the results
---> 
 
 | Protocol | Mechanism | Time | Chunks Sent | Chunks Received | Bytes Sent | Bytes Received |
 |----------|-----------|------|-------------|-----------------|------------|----------------|
@@ -39,19 +30,7 @@ Create a table with the results
 | UDP      | STOP_AND_WAIT | 3.479s | 12800 | 12800 | 209715200 | 209715200 |
 
 
-## Results saving the file
-
-<!--
-TCP - STREAMING - 1.516s - Chunks sent: 12800  -  Chunks received: 12800 -209715200 bytes 
-
-TCP - STOP_AND_WAIT -  1.6569246s - Chunks sent: 12800  -  Chunks received: 12800 -209715200 bytes
-
-UDP - STREAMING -3.478s - Chunks sent: 12800  -  Chunks received: 12708 -209715200 bytes - received: 208207872 bytes
-
-UDP - STOP_AND_WAIT - 3.799s - Chunks sent: 12800  -  Chunks received: 12800 -209715200 bytes
-
-Create a table with the results
--->
+## Results saving the sent file (200 MB)
 
 | Protocol | Mechanism | Time | Chunks Sent | Chunks Received | Bytes Sent | Bytes Received |
 |----------|-----------|------|-------------|-----------------|------------|----------------|
@@ -59,6 +38,16 @@ Create a table with the results
 | TCP      | STOP_AND_WAIT | 1.656s | 12800 | 12800 | 209715200 | 209715200 |
 | UDP      | STREAMING | 3.478s | 12800 | 12708 | 209715200 | 208207872 |
 | UDP      | STOP_AND_WAIT | 3.799s | 12800 | 12800 | 209715200 | 209715200 |
+
+## 500 MB
+
+| Protocol | Mechanism | Time | Chunks Sent | Chunks Received | Bytes Sent | Bytes Received |
+|----------|-----------|------|-------------|-----------------|------------|----------------|
+| TCP      | STREAMING | 0.433s | 32000 | 32000 | 524288000 | 524288000 |
+| TCP      | STOP_AND_WAIT | 1.374s | 32000 | 32000 | 524288000 | 524288000 |
+| UDP      | STREAMING | 7.0790s | 32000 | 31996 | 524288000 | 524222464 |
+| UDP      | STOP_AND_WAIT | 8.576s | 32000 | 32000 | 524288000 | 524288000 |
+
 
 
  
