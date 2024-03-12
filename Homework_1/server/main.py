@@ -69,7 +69,6 @@ class Server:
         self.chunk_size = int(os.environ.get('CHUNK_SIZE', 1024))
 
     def start(self):
-        map_time_chunk = {}
         bytes_recv = 0
         chunks_recv = 0
         file_name = os.environ.get('FILE_NAME')
@@ -84,18 +83,13 @@ class Server:
                     chunks_recv += 1
                     chunk = recv_handler(self.chunk_size)
                     file_handler.write(chunk)
-                    map_time_chunk[time.time()] = len(chunk)
                 logging.info(f'File received: {file_name}')
                 logging.info(f'Bytes received: {bytes_recv} - Chunks received: {chunks_recv}')
         except Exception as e:
             logging.error(f'Error: {e}')   
         finally:
             file_handler.close() 
-            # append map_time_chunk to file (statistics.txt)
-            # with open('statistics.txt', 'a') as file:
-            #     file.write(f'PROTOCOL: {self.protocol} - MECHANISM: {self.mechanism} - CHUNK_SIZE: {self.chunk_size}\n')
-            #     for key, value in map_time_chunk.items():
-            #         file.write(f'{key} - {value}\n')
+          
 
 
 if __name__ == '__main__':
