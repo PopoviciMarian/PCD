@@ -6,7 +6,7 @@
 # 4. Compile the code using gpp
 # 5. Save the output of the compilation (binaries) to Google Cloud Storage
 # 6. Update the status of the code to "compiled" in the firebase
-# 7. Publish a message to the topic "executor" containing the id of the code
+# 7. Publish a message to the topic "tester" containing the id of the code
 # 8. Delete the folder containing the code
 # 9. Acknowledge the message
 # 10. Repeat
@@ -38,9 +38,9 @@ def upload_blob(source_file_name: str, destination_blob_name: str) -> None:
 
 def publish_message(message: dict) -> None:
     message = json.dumps(message).encode('utf-8')
-    future = publisher.publish(constants.EXECUTOR_TOPIC, data=message)
+    future = publisher.publish(constants.TESTER_TOPIC, data=message)
     future.result()
-    logging.info(f"Published message to {constants.EXECUTOR_TOPIC} with message_id {future.result()}")
+    logging.info(f"Published message to {constants.TESTER_TOPIC} with message_id {future.result()}")
 
 def update_status(id: str, status: str) -> None:
     doc_ref = db.collection(u'solutions').document(id)
