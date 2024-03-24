@@ -24,7 +24,7 @@ from google.cloud import storage
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = constants.CERT_PATH
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = constants.CERT_PATH
 subscriber = pubsub_v1.SubscriberClient()
 publisher = pubsub_v1.PublisherClient()
 db = firestore.Client()
