@@ -37,6 +37,7 @@ bucket = storage_client.bucket(constants.BUCKET_NAME)
 def download_blob(source_blob_name: str, destination_file_name: str) -> None:
     blob = bucket.blob(source_blob_name)
     blob.download_to_filename(destination_file_name)
+    os.chmod(destination_file_name, 0o777)
 
 def update_status(id: str, status: str) -> None:
     doc_ref = db.collection(u'solutions').document(id)
