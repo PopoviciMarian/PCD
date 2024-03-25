@@ -77,10 +77,10 @@ def run_test(id: str, input: str, output: str, timeout: int) -> str:
         #wait for the process to finish
         process.wait(timeout=timeout)
         #get the output of the process
-        if not os.path.exists(os.path.join(".", "tmp", "output.txt")):
-            result["status"] = "Failed"
+        if not os.path.exists(os.path.join(".", "output.txt")):
+            result["status"] = "Output file not found"
         else:    
-            with open(os.path.join(".", "tmp", "output.txt"), "w") as f:
+            with open(os.path.join(".", "output.txt"), "w") as f:
                 result["output"] = f.read()
                 logging.info(f"Output: {result['output']}")
             #compare the output with the expected output, trim the output to remove whitespaces
