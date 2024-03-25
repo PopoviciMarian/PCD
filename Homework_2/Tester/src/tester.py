@@ -81,7 +81,9 @@ def run_test(id: str, input: str, output: str, timeout: int) -> str:
         else:    
             with open(os.path.join(".", "tmp", "output.txt"), "w") as f:
                 result["output"] = f.read()
-            if result["output"] == output:
+                logging.info(f"Output: {result['output']}")
+            #compare the output with the expected output, trim the output to remove whitespaces
+            if result["output"].strip() == output.strip():
                 result["status"] = "Passed"
     except subprocess.TimeoutExpired:
         result["status"] = "Timeout"
