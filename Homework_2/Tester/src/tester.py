@@ -80,8 +80,9 @@ def run_test(id: str, input: str, output: str, timeout: int) -> str:
         if not os.path.exists(os.path.join(".", "output.txt")):
             result["status"] = "Output file not found"
         else:
+            logging.info("Output file found")
             os.chmod(os.path.join(".", "output.txt"), 0o777)    
-            with open(os.path.join(".", "output.txt"), "w") as f:
+            with open(os.path.join(".", "output.txt"), "r") as f:
                 result["output"] = f.read()
                 logging.info(f"Output: {result['output']}")
             #compare the output with the expected output, trim the output to remove whitespaces
