@@ -79,7 +79,8 @@ def run_test(id: str, input: str, output: str, timeout: int) -> str:
         #get the output of the process
         if not os.path.exists(os.path.join(".", "output.txt")):
             result["status"] = "Output file not found"
-        else:    
+        else:
+            os.chmod(os.path.join(".", "output.txt"), 0o777)    
             with open(os.path.join(".", "output.txt"), "w") as f:
                 result["output"] = f.read()
                 logging.info(f"Output: {result['output']}")
