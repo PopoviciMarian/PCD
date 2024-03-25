@@ -74,7 +74,7 @@ def run_test(id: str, input: str, output: str, timeout: int) -> str:
         #wait for the process to finish
         process.wait(timeout=timeout)
         #get the output of the process
-        with open("output.txt", "r") as f:
+        with open(os.path.join(".", "tmp", "output.txt"), "w") as f:
             result["output"] = f.read()
         if result["output"] == output:
             result["status"] = "Passed"
