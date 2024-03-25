@@ -68,10 +68,11 @@ def run_test(id: str, input: str, output: str, timeout: int) -> str:
     with open(os.path.join(".", "tmp", "input.txt"), "w") as f:
         f.write(input)
     logging.info(f"Running test with input {input} and expected output {output}")
-    
+    absolute_path = os.path.abspath(os.path.join(".", "tmp", id))
+    logging.info(f"Running binary {absolute_path}")
     start = time.time()
     #run the binary with the input file
-    process = subprocess.Popen([f"./tmp/{id}"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    process = subprocess.Popen((absolute_path), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     try:
         #wait for the process to finish
         process.wait(timeout=timeout)
