@@ -86,6 +86,9 @@ def run_test(id: str, input: str, output: str, timeout: int) -> str:
             with open(os.path.join(".", "output.txt"), "r") as f:
                 result["output"] = f.read()
                 logging.info(f"Output: {result['output']}")
+                #delete the output file
+                os.remove(os.path.join(".", "output.txt"))
+                os.remove(os.path.join(".", "input.txt"))
             #compare the output with the expected output, trim the output to remove whitespaces
             if result["output"].strip() == output.strip():
                 result["status"] = "Passed"
