@@ -65,7 +65,7 @@ def run_test(id: str, input: str, output: str, timeout: int) -> str:
     #status = Passed/Failed/Timeout
     result = {"status": "Failed", "output": ""}
     #create a file with the input called input.txt
-    with open(os.path.join(".", "tmp", "input.txt"), "w") as f:
+    with open(os.path.join(".", "input.txt"), "w") as f:
         f.write(input)
     logging.info(f"Running test with input {input} and expected output {output}")
     absolute_path = os.path.abspath(os.path.join(".", "tmp", id))
