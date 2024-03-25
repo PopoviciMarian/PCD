@@ -66,6 +66,7 @@ def run_test(id: str, input: str, output: str, timeout: int) -> str:
     #create a file with the input called input.txt
     with open("input.txt", "w") as f:
         f.write(input)
+    logging.info(f"Running test with input {input} and expected output {output}")
     
     start = time.time()
     #run the binary with the input file
@@ -74,10 +75,13 @@ def run_test(id: str, input: str, output: str, timeout: int) -> str:
         #wait for the process to finish
         process.wait(timeout=timeout)
         #get the output of the process
-        with open(os.path.join(".", "tmp", "output.txt"), "w") as f:
-            result["output"] = f.read()
-        if result["output"] == output:
-            result["status"] = "Passed"
+        if not os.path.exists(os.path.join(".", "tmp", "output.txt")):
+            result["status"] = "Failed"
+        else:    
+            with open(os.path.join(".", "tmp", "output.txt"), "w") as f:
+                result["output"] = f.read()
+            if result["output"] == output:
+                result["status"] = "Passed"
     except subprocess.TimeoutExpired:
         result["status"] = "Timeout"
     end = time.time()
