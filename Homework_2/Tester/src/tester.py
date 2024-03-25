@@ -21,6 +21,8 @@ import json
 from google.cloud import pubsub_v1
 from google.cloud import firestore
 from google.cloud import storage
+import subprocess
+import time
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 
@@ -59,13 +61,29 @@ def delete_dir(path: str) -> None:
 
 
 def run_test(id: str, input: str, output: str, timeout: int) -> str:
+    #status = Passed/Failed/Timeout
     result = {"status": "Failed", "output": ""}
     #create a file with the input called input.txt
     with open("input.txt", "w") as f:
         f.write(input)
-    return {"status": "Passed", "time": 2}
     
-    #run the binary
+    start = time.time()
+    #run the binary with the input file
+    process = subprocess.Popen([f"./tmp/{id}"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    try:
+        #wait for the process to finish
+        process.wait(timeout=timeout)
+        #get the output of the process
+        with open("output.txt", "r") as f:
+            result["output"] = f.read()
+        if result["output"] == output:
+            result["status"] = "Passed"
+    except subprocess.TimeoutExpired:
+        result["status"] = "Timeout"
+    end = time.time()
+    result["time"] = end - start
+    return result
+
 
 
 def save_result(solution_id: str, test_id: str, result: dict) -> None:
