@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+require('dotenv').config();
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
