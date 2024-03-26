@@ -7,6 +7,9 @@ import { db } from '../../../config/firestore';
 import { TProblem } from '@/components/dashboard/problems_table/problems';
 import SolutionEditor from '@/components/dashboard/problem_solution/solutionEditor';
 import Solutions from '@/components/dashboard/problem_solutions/Solutions';
+import Markdown from 'react-markdown'
+import { Box } from '@mui/material';
+
 const ProblemPage = () => {
     const [problem, setProblem] = React.useState<TProblem | null>(null);
 
@@ -28,8 +31,11 @@ const ProblemPage = () => {
         <div>
             {problem &&
                 <div>
-                    <h1>{problem.name}</h1>
-                    <p>{problem.description}</p>
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <h1>{problem.name}</h1>
+                        <h3>{problem.author}</h3>
+                    </Box>
+                    <Markdown>{problem.description}</Markdown>
                 </div>
 
             }

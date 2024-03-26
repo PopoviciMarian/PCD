@@ -14,6 +14,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { useRouter } from 'next/navigation'
 import { ArrowRight as ArrowRightIcon } from '@phosphor-icons/react/dist/ssr/ArrowRight';
 import dayjs from 'dayjs';
 import Link from 'next/link';
@@ -26,7 +27,10 @@ export type TProblem = {
     tests: [string];
 }
 
+
 export const ProblemsTable = ({ problems = [] }: { problems?: TProblem[] }): React.JSX.Element => {
+    const router = useRouter();
+
     return (
         <Card>
             <CardHeader title="Problems" />
@@ -64,7 +68,9 @@ export const ProblemsTable = ({ problems = [] }: { problems?: TProblem[] }): Rea
                 </Table>
             </Box>
             <CardActions>
-                <Button endIcon={<ArrowRightIcon />} size="small" variant="text">
+                <Button
+                    onClick={() => { router.push('/dashboard/addProblem') }}
+                    endIcon={<ArrowRightIcon />} size="small" variant="text">
                     Add Problem
 
                 </Button>

@@ -15,7 +15,7 @@ const SolutionEditor = ({ problemId }: { problemId: string }) => {
     const handleEditorDidMount = (editor: any, monaco: any) => {
         editorRef.current = editor;
     }
-    const defaultValue = `#include <iostream>\n\nusing namespace std;\n\nint main() {\n\n //write your code here, reed the input from input.txt and write the output to output.txt if needed\n\nreturn 0;\n}`;
+    const defaultValue = `#include <iostream>\n#include <fstream>\n\nusing namespace std;\n\nifstream fin("input.txt");\nofstream fout("output.txt");\n\nint main() {\n\n //write your code here, reed the input from input.txt and write the output to output.txt if needed\n\nreturn 0;\n}`;
 
     const submitSolution = async () => {
         const code = editorRef.current.getValue();
